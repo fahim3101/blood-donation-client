@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply font-body text-gray-800 bg-cream;
+}
+
+h1, h2, h3, h4 {
+  @apply font-heading;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: #FFC7C7;
+  border-radius: 8px;
+}
