@@ -1,45 +1,48 @@
-# Lifeline – Blood Donation Platform (Server)
+# Lifeline – Blood Donation Platform (Client)
 
-Lifeline is a full-stack blood donation platform that connects willing blood donors
-with patients and families in urgent need across Bangladesh. This repository contains
-the backend (REST API) built with Node.js, Express, and MongoDB.
+Lifeline is a full-stack blood donation platform connecting willing blood donors with
+patients and families in urgent need across Bangladesh. This repository contains the
+frontend, built with React, Vite, and Tailwind CSS.
 
 ## Purpose
 
-The server powers user authentication, role-based access control (Donor / Volunteer /
-Admin), donation request management, donor search by blood group and location, and
-Stripe-powered funding for the platform.
+The client provides a warm, story-driven interface for donor registration, donation
+request browsing and creation, donor search, funding, and role-based dashboards for
+Donors, Volunteers, and Admins.
 
-## Live API
+## Live Site
 
-https://blood-donation-server-brown-eight.vercel.app
+https://blood-donation-client-indol.vercel.app
 
 ## Key Features
 
-- JWT-based authentication and protected private routes
-- Role-based access control middleware (Admin, Volunteer, Donor)
-- Full donation request lifecycle: pending → inprogress → done / canceled
-- Donor search by blood group, district, and upazila
-- Stripe payment integration for funding/donations
-- Pagination and status filtering for users and donation requests
-- Aggregated statistics and chart data for the admin dashboard
-- Bangladesh district & upazila geo data endpoints
+- Warm, emotionally resonant UI with a soft red/pink theme
+- JWT-based authentication with persistent sessions (no logout on page reload)
+- Role-based dashboards for Donor, Volunteer, and Admin
+- Create, edit, delete, and filter donation requests with pagination
+- Donate flow with a confirmation modal
+- Public donor search by blood group, district, and upazila
+- Stripe-powered funding page
+- Admin statistics cards and a donation-requests-over-time chart (Recharts)
+- Fully responsive design for mobile, tablet, and desktop
+- Smooth page animations with Framer Motion
 
 ## NPM Packages Used
 
-- express
-- mongodb
-- cors
-- dotenv
-- jsonwebtoken
-- bcryptjs
-- stripe
-- nodemon (development only)
+- react, react-dom, react-router-dom
+- axios
+- tailwindcss
+- react-hot-toast
+- react-icons
+- sweetalert2
+- recharts
+- framer-motion
+- @stripe/react-stripe-js, @stripe/stripe-js
 
 ## Environment Variables
 
-See `.env.example` for the required variables (MongoDB connection, JWT secret, Stripe
-secret key).
+See `.env.example` for the required variables (API URL, ImageBB key, Stripe publishable
+key).
 
 ## Running Locally
 
