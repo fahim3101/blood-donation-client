@@ -46,7 +46,17 @@ const DonorHome = () => {
           </div>
           <DonationRequestsTable requests={requests} onChanged={fetchRecent} mode="donor" />
         </>
-      ) : null}
+      ) : (
+        <div className="bg-white rounded-2xl shadow-soft border border-blush p-8 text-center">
+          <p className="text-gray-500 mb-4">You haven't created any donation requests yet.</p>
+          <Link
+            to="/dashboard/create-donation-request"
+            className="inline-block bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-full font-medium transition-colors"
+          >
+            Create Your First Request
+          </Link>
+        </div>
+      )}
     </div>
   );
 };

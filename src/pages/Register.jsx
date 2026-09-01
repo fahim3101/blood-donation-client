@@ -51,8 +51,9 @@ const Register = () => {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+              <label htmlFor="reg-name" className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
               <input
+                id="reg-name"
                 type="text"
                 required
                 value={form.name}
@@ -61,8 +62,9 @@ const Register = () => {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+              <label htmlFor="reg-email" className="block text-sm font-medium text-gray-700 mb-1">Email</label>
               <input
+                id="reg-email"
                 type="email"
                 required
                 value={form.email}
@@ -73,8 +75,9 @@ const Register = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Profile Picture (Avatar)</label>
+            <label htmlFor="reg-avatar" className="block text-sm font-medium text-gray-700 mb-1">Profile Picture (Avatar)</label>
             <input
+              id="reg-avatar"
               type="file"
               accept="image/*"
               required
@@ -84,8 +87,9 @@ const Register = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Blood Group</label>
+            <label htmlFor="reg-blood" className="block text-sm font-medium text-gray-700 mb-1">Blood Group</label>
             <select
+              id="reg-blood"
               required
               value={form.bloodGroup}
               onChange={(e) => handleChange('bloodGroup', e.target.value)}
@@ -109,8 +113,9 @@ const Register = () => {
 
           <div className="grid sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+              <label htmlFor="reg-password" className="block text-sm font-medium text-gray-700 mb-1">Password</label>
               <input
+                id="reg-password"
                 type="password"
                 required
                 value={form.password}
@@ -119,8 +124,9 @@ const Register = () => {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Confirm Password</label>
+              <label htmlFor="reg-confirm" className="block text-sm font-medium text-gray-700 mb-1">Confirm Password</label>
               <input
+                id="reg-confirm"
                 type="password"
                 required
                 value={form.confirm_password}
@@ -133,7 +139,7 @@ const Register = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-primary-600 hover:bg-primary-700 text-white py-3 rounded-lg font-medium transition-colors disabled:opacity-60"
+            className="w-full bg-primary-600 hover:bg-primary-700 text-white py-3 rounded-full font-medium transition-colors disabled:opacity-60"
           >
             {loading ? 'Creating account...' : 'Register'}
           </button>

@@ -49,11 +49,11 @@ const Funding = () => {
           </button>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-soft overflow-hidden">
+        <div className="bg-white rounded-2xl shadow-soft overflow-hidden overflow-x-auto">
           {loading ? (
             <Spinner />
           ) : (
-            <table className="w-full text-left">
+            <table className="w-full text-left min-w-[600px]">
               <thead className="bg-blush text-gray-700 text-sm">
                 <tr>
                   <th className="px-6 py-4">Name</th>

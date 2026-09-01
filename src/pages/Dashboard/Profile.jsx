@@ -49,7 +49,7 @@ const Profile = () => {
         {!editing && (
           <button
             onClick={() => setEditing(true)}
-            className="flex items-center gap-2 bg-primary-600 hover:bg-primary-700 text-white px-5 py-2 rounded-lg font-medium transition-colors"
+            className="flex items-center gap-2 bg-primary-600 hover:bg-primary-700 text-white px-5 py-2 rounded-full font-medium transition-colors"
           >
             <FaEdit /> Edit
           </button>
@@ -74,8 +74,9 @@ const Profile = () => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+          <label htmlFor="profile-name" className="block text-sm font-medium text-gray-700 mb-1">Name</label>
           <input
+            id="profile-name"
             disabled={!editing}
             value={form.name}
             onChange={(e) => handleChange('name', e.target.value)}
@@ -84,13 +85,14 @@ const Profile = () => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-          <input disabled value={user?.email} className="w-full border border-gray-200 bg-gray-50 rounded-lg px-4 py-2.5" />
+          <label htmlFor="profile-email" className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+          <input id="profile-email" disabled value={user?.email} className="w-full border border-gray-200 bg-gray-50 rounded-lg px-4 py-2.5" />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Blood Group</label>
+          <label htmlFor="profile-blood" className="block text-sm font-medium text-gray-700 mb-1">Blood Group</label>
           <select
+            id="profile-blood"
             disabled={!editing}
             value={form.bloodGroup}
             onChange={(e) => handleChange('bloodGroup', e.target.value)}
@@ -113,12 +115,12 @@ const Profile = () => {
           ) : (
             <>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">District</label>
-                <input disabled value={form.district} className="w-full border border-gray-200 bg-gray-50 rounded-lg px-4 py-2.5" />
+                <label htmlFor="profile-district" className="block text-sm font-medium text-gray-700 mb-1">District</label>
+                <input id="profile-district" disabled value={form.district} className="w-full border border-gray-200 bg-gray-50 rounded-lg px-4 py-2.5" />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Upazila</label>
-                <input disabled value={form.upazila} className="w-full border border-gray-200 bg-gray-50 rounded-lg px-4 py-2.5" />
+                <label htmlFor="profile-upazila" className="block text-sm font-medium text-gray-700 mb-1">Upazila</label>
+                <input id="profile-upazila" disabled value={form.upazila} className="w-full border border-gray-200 bg-gray-50 rounded-lg px-4 py-2.5" />
               </div>
             </>
           )}
@@ -128,7 +130,7 @@ const Profile = () => {
           <button
             type="submit"
             disabled={saving}
-            className="flex items-center justify-center gap-2 w-full bg-primary-600 hover:bg-primary-700 text-white py-3 rounded-lg font-medium transition-colors disabled:opacity-60"
+            className="flex items-center justify-center gap-2 w-full bg-primary-600 hover:bg-primary-700 text-white py-3 rounded-full font-medium transition-colors disabled:opacity-60"
           >
             <FaSave /> {saving ? 'Saving...' : 'Save Changes'}
           </button>

@@ -6,6 +6,8 @@ import DashboardLayout from '../layouts/DashboardLayout';
 import Home from '../pages/Home';
 import Register from '../pages/Register';
 import Login from '../pages/Login';
+import ForgotPassword from '../pages/ForgotPassword';
+import ResetPassword from '../pages/ResetPassword';
 import Search from '../pages/Search';
 import BloodDonationRequests from '../pages/BloodDonationRequests';
 import DonationRequestDetails from '../pages/DonationRequestDetails';
@@ -32,6 +34,8 @@ const router = createBrowserRouter([
       { index: true, element: <Home /> },
       { path: 'register', element: <Register /> },
       { path: 'login', element: <Login /> },
+      { path: 'forgot-password', element: <ForgotPassword /> },
+      { path: 'reset-password', element: <ResetPassword /> },
       { path: 'search', element: <Search /> },
       { path: 'blood-donation-requests', element: <BloodDonationRequests /> },
       {

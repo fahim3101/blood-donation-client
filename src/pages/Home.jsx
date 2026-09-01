@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import toast from 'react-hot-toast';
 import { FaHeartbeat, FaHandHoldingHeart, FaUserFriends, FaPhoneAlt, FaEnvelope } from 'react-icons/fa';
 
 const stats = [
@@ -164,22 +165,29 @@ const Home = () => {
         </div>
 
         <form
-          onSubmit={(e) => e.preventDefault()}
+          onSubmit={(e) => {
+            e.preventDefault();
+            toast.success('Thanks for reaching out! We will reply soon.');
+            e.target.reset();
+          }}
           className="bg-white rounded-2xl shadow-soft border border-blush p-8 space-y-4"
         >
           <input
+            id="contact-name"
             type="text"
             placeholder="Your Name"
             required
             className="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-primary-400"
           />
           <input
+            id="contact-email"
             type="email"
             placeholder="Your Email"
             required
             className="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-primary-400"
           />
           <textarea
+            id="contact-message"
             rows="4"
             placeholder="Your Message"
             required
@@ -187,7 +195,7 @@ const Home = () => {
           ></textarea>
           <button
             type="submit"
-            className="w-full bg-primary-600 hover:bg-primary-700 text-white py-3 rounded-lg font-medium transition-colors"
+            className="w-full bg-primary-600 hover:bg-primary-700 text-white py-3 rounded-full font-medium transition-colors"
           >
             Send Message
           </button>
