@@ -18,8 +18,21 @@ const Profile = () => {
     bloodGroup: user?.bloodGroup || '',
     district: user?.district || '',
     upazila: user?.upazila || '',
+    isAvailable: user?.isAvailable !== false,
   });
   const [avatarFile, setAvatarFile] = useState(null);
+
+  const toggleAvailability = async () => {
+    const next = !form.isAvailable;
+    try {
+      await axiosSecure.patch(`/users/availability/${user.email}`, { isAvailable: next });
+      setForm((p) => ({ ...p, isAvailable: next }));
+      await refreshUser();
+      toast.success(next ? 'You are now available for donation' : 'You are now unavailable');
+    } catch {
+      toast.error('Failed to update availability');
+    }
+  };
 
   const handleChange = (key, value) => setForm((prev) => ({ ...prev, [key]: value }));
 
@@ -103,6 +116,20 @@ const Profile = () => {
               <option key={bg} value={bg}>{bg}</option>
             ))}
           </select>
+        </div>
+
+        <div className="flex items-center justify-between bg-blush rounded-xl px-4 py-3">
+          <div>
+            <p className="font-medium text-gray-800 text-sm">Available for donation</p>
+            <p className="text-xs text-gray-500">{form.isAvailable ? 'You appear in search results' : 'Hidden from search'}</p>
+          </div>
+          <button
+            type="button"
+            onClick={toggleAvailability}
+            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${form.isAvailable ? 'bg-primary-600' : 'bg-gray-300'}`}
+          >
+            <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${form.isAvailable ? 'translate-x-6' : 'translate-x-1'}`} />
+          </button>
         </div>
 
         <div className="grid sm:grid-cols-2 gap-4">

@@ -88,7 +88,12 @@ const Funding = () => {
             <button onClick={() => setModalOpen(false)} className="absolute top-4 right-4 text-gray-400 hover:text-gray-700">
               <FaTimes />
             </button>
-            <h3 className="font-heading text-xl font-semibold text-gray-900 mb-6">Give a Fund</h3>
+            <h3 className="font-heading text-xl font-semibold text-gray-900 mb-2">Give a Fund</h3>
+            <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 mb-4 text-xs text-amber-800">
+              <p className="font-semibold">Test Card (Stripe Test Mode)</p>
+              <p className="font-mono mt-1">4242 4242 4242 4242</p>
+              <p>Exp: 12/34 &nbsp; CVC: 123 &nbsp; ZIP: 12345</p>
+            </div>
             <Elements stripe={stripePromise}>
               <CheckoutForm
                 onSuccess={() => {

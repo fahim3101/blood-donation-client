@@ -40,7 +40,12 @@ const BloodDonationRequests = () => {
         {loading && <Spinner />}
 
         {!loading && requests.length === 0 && (
-          <p className="text-center text-gray-400">No pending donation requests at the moment. 🙏</p>
+          <div className="text-center py-16 bg-white rounded-2xl shadow-soft border border-blush max-w-xl mx-auto">
+            <p className="text-5xl mb-4">🙏</p>
+            <p className="text-gray-600 font-medium">No pending requests right now</p>
+            <p className="text-sm text-gray-400 mt-1">Be the first to create a request and help will arrive.</p>
+            <Link to="/dashboard/create-donation-request" className="inline-block mt-6 bg-primary-600 hover:bg-primary-700 text-white px-6 py-2.5 rounded-full font-medium">Create Request</Link>
+          </div>
         )}
 
         {!loading && requests.length > 0 && (

@@ -77,11 +77,19 @@ const Search = () => {
           {loading && <Spinner />}
 
           {!loading && donors === null && (
-            <p className="text-center text-gray-400">Use the filters above to find donors.</p>
+            <div className="text-center py-12 bg-white rounded-2xl shadow-soft border border-blush">
+              <p className="text-4xl mb-3">🔍</p>
+              <p className="text-gray-500">Use the filters above to find donors.</p>
+              <p className="text-xs text-gray-400 mt-1">Try a different blood group or district</p>
+            </div>
           )}
 
           {!loading && donors && donors.length === 0 && (
-            <p className="text-center text-gray-400">No donors found matching your criteria.</p>
+            <div className="text-center py-12 bg-white rounded-2xl shadow-soft border border-blush">
+              <p className="text-4xl mb-3">😔</p>
+              <p className="text-gray-600 font-medium">No donors found matching your criteria.</p>
+              <p className="text-sm text-gray-400 mt-1">Try broadening your search — select "Any" blood group.</p>
+            </div>
           )}
 
           {!loading && donors && donors.length > 0 && (
