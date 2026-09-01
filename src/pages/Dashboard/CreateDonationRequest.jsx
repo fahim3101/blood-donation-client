@@ -120,6 +120,7 @@ const CreateDonationRequest = () => {
               type="date"
               required
               value={form.donationDate}
+              min={new Date().toISOString().split('T')[0]}
               onChange={(e) => handleChange('donationDate', e.target.value)}
               className="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-primary-400"
             />
@@ -151,7 +152,7 @@ const CreateDonationRequest = () => {
         <button
           type="submit"
           disabled={submitting}
-          className="w-full bg-primary-600 hover:bg-primary-700 text-white py-3 rounded-lg font-medium transition-colors disabled:opacity-60"
+          className="w-full bg-primary-600 hover:bg-primary-700 text-white py-3 rounded-full font-medium transition-colors disabled:opacity-60"
         >
           {submitting ? 'Submitting...' : 'Request'}
         </button>

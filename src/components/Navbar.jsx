@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { FaTint, FaBars, FaTimes } from 'react-icons/fa';
 import useAuth from '../hooks/useAuth';
@@ -7,6 +7,15 @@ const Navbar = () => {
   const { user, logout } = useAuth();
   const [open, setOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef(null);
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (menuRef.current && !menuRef.current.contains(e.target)) setMenuOpen(false);
+    };
+    if (menuOpen) document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, [menuOpen]);
 
   const navLinkClass = ({ isActive }) =>
     `font-medium transition-colors hover:text-primary-600 ${isActive ? 'text-primary-600' : 'text-gray-700'}`;
@@ -41,17 +50,17 @@ const Navbar = () => {
 
           <div className="hidden md:flex items-center gap-4">
             {user ? (
-              <div className="relative">
+              <div className="relative" ref={menuRef}>
                 <button onClick={() => setMenuOpen(!menuOpen)} className="flex items-center gap-2">
                   <img
-                    src={user.avatar}
+                    src={user.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(user.name || 'User')}&background=DC2828&color=fff`}
                     alt={user.name}
+                    onError={(e) => { e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(user.name || 'User')}&background=DC2828&color=fff`; }}
                     className="w-10 h-10 rounded-full object-cover border-2 border-primary-200"
                   />
                 </button>
                 {menuOpen && (
                   <div
-                    onMouseLeave={() => setMenuOpen(false)}
                     className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-soft border border-blush py-2"
                   >
                     <p className="px-4 py-2 text-sm text-gray-500 truncate">{user.name}</p>

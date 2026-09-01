@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import axios from 'axios';
+import toast from 'react-hot-toast';
 import { FaSearch, FaTint, FaMapMarkerAlt, FaEnvelope } from 'react-icons/fa';
 import AddressSelector from '../components/AddressSelector';
 import Spinner from '../components/Spinner';
+import axiosSecure from '../utils/axiosSecure';
 
 const bloodGroups = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
 
@@ -20,8 +21,10 @@ const Search = () => {
       if (filters.district) params.district = filters.district;
       if (filters.upazila) params.upazila = filters.upazila;
 
-      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/search-donors`, { params });
+      const { data } = await axiosSecure.get('/search-donors', { params });
       setDonors(data);
+    } catch (err) {
+      toast.error(err?.response?.data?.message || 'Failed to search donors. Please login again.');
     } finally {
       setLoading(false);
     }
@@ -64,7 +67,7 @@ const Search = () => {
 
           <button
             type="submit"
-            className="bg-primary-600 hover:bg-primary-700 text-white py-2.5 rounded-lg font-medium flex items-center justify-center gap-2 transition-colors"
+            className="bg-primary-600 hover:bg-primary-700 text-white py-2.5 rounded-full font-medium flex items-center justify-center gap-2 transition-colors"
           >
             <FaSearch /> Search
           </button>
@@ -86,8 +89,9 @@ const Search = () => {
               {donors.map((donor) => (
                 <div key={donor._id} className="bg-white rounded-2xl shadow-soft border border-blush p-6 text-center">
                   <img
-                    src={donor.avatar}
+                    src={donor.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(donor.name)}&background=FFE9E4&color=DC2828&size=80`}
                     alt={donor.name}
+                    onError={(e) => { e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(donor.name)}&background=FFE9E4&color=DC2828&size=80`; }}
                     className="w-20 h-20 rounded-full object-cover mx-auto mb-4 border-2 border-primary-200"
                   />
                   <h3 className="font-heading text-lg font-semibold text-gray-800">{donor.name}</h3>

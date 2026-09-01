@@ -59,8 +59,9 @@ const Profile = () => {
       <form onSubmit={handleSave} className="bg-white rounded-2xl shadow-soft p-6 sm:p-8 space-y-5">
         <div className="flex items-center gap-4">
           <img
-            src={avatarFile ? URL.createObjectURL(avatarFile) : form.avatar}
+            src={avatarFile ? URL.createObjectURL(avatarFile) : form.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(form.name || 'User')}&background=DC2828&color=fff&size=80`}
             alt={form.name}
+            onError={(e) => { if (!avatarFile) e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(form.name || 'User')}&background=DC2828&color=fff&size=80`; }}
             className="w-20 h-20 rounded-full object-cover border-2 border-primary-200"
           />
           {editing && (

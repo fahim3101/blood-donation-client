@@ -36,7 +36,7 @@ const router = createBrowserRouter([
       { path: 'login', element: <Login /> },
       { path: 'forgot-password', element: <ForgotPassword /> },
       { path: 'reset-password', element: <ResetPassword /> },
-      { path: 'search', element: <Search /> },
+      { path: 'search', element: <PrivateRoute><Search /></PrivateRoute> },
       { path: 'blood-donation-requests', element: <BloodDonationRequests /> },
       {
         path: 'donation-requests/:id',
@@ -100,6 +100,15 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: 'all-blood-donation-requests',
+        element: (
+          <RoleRoute allowedRoles={['admin', 'volunteer']}>
+            <AllBloodDonationRequests />
+          </RoleRoute>
+        ),
+      },
+      {
+        // legacy alias — keeps old bookmarked URL working
         path: 'all-blood-donation-request',
         element: (
           <RoleRoute allowedRoles={['admin', 'volunteer']}>

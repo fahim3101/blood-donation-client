@@ -92,7 +92,7 @@ const AllUsers = () => {
                 {users.map((u) => (
                   <tr key={u._id}>
                     <td className="px-5 py-4">
-                      <img src={u.avatar} alt={u.name} className="w-10 h-10 rounded-full object-cover" />
+                      <img src={u.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(u.name)}&background=FFE9E4&color=DC2828&size=40`} alt={u.name} onError={(e) => { e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(u.name)}&background=FFE9E4&color=DC2828&size=40`; }} className="w-10 h-10 rounded-full object-cover" />
                     </td>
                     <td className="px-5 py-4 font-medium text-gray-800">{u.name}</td>
                     <td className="px-5 py-4 text-gray-500">{u.email}</td>

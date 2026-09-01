@@ -37,19 +37,16 @@ const DashboardLayout = () => {
           <FaUser /> Profile
         </NavLink>
 
-        {user?.role === 'donor' && (
-          <>
-            <NavLink to="/dashboard/my-donation-requests" className={linkClass}>
-              <FaList /> My Donation Requests
-            </NavLink>
-            <NavLink to="/dashboard/create-donation-request" className={linkClass}>
-              <FaPlusCircle /> Create Request
-            </NavLink>
-          </>
-        )}
+        {/* My Requests and Create are now visible to all authenticated roles — fixes missing nav for admin/volunteer */}
+        <NavLink to="/dashboard/my-donation-requests" className={linkClass}>
+          <FaList /> My Donation Requests
+        </NavLink>
+        <NavLink to="/dashboard/create-donation-request" className={linkClass}>
+          <FaPlusCircle /> Create Request
+        </NavLink>
 
         {(user?.role === 'admin' || user?.role === 'volunteer') && (
-          <NavLink to="/dashboard/all-blood-donation-request" className={linkClass}>
+          <NavLink to="/dashboard/all-blood-donation-requests" className={linkClass}>
             <FaList /> All Donation Requests
           </NavLink>
         )}

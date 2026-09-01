@@ -15,8 +15,19 @@ axiosSecure.interceptors.request.use((config) => {
 axiosSecure.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error?.response?.status === 401 || error?.response?.status === 403) {
-      // token expired or forbidden - let the calling component decide what to do
+    const status = error?.response?.status;
+    const message = error?.response?.data?.message || '';
+    const isExpiredOrBlocked =
+      status === 401 ||
+      (status === 403 && (message.toLowerCase().includes('blocked') || message.toLowerCase().includes('unauthorized')));
+
+    if (isExpiredOrBlocked) {
+      localStorage.removeItem('access-token');
+      localStorage.removeItem('user-email');
+      // Avoid redirect loop if already on login page
+      if (window.location.pathname !== '/login') {
+        window.location.href = '/login';
+      }
     }
     return Promise.reject(error);
   }

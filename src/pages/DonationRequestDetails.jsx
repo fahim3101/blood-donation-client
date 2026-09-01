@@ -16,7 +16,7 @@ const DonationRequestDetails = () => {
   const [submitting, setSubmitting] = useState(false);
 
   const fetchRequest = () => {
-    axiosSecure.get(`/donation-requests/${id}`).then((res) => setRequest(res.data));
+    axiosSecure.get(`/donation-requests/${id}`).then((res) => setRequest(res.data)).catch(() => toast.error('Failed to load request'));
   };
 
   useEffect(() => {
@@ -24,21 +24,20 @@ const DonationRequestDetails = () => {
     axiosSecure
       .get(`/donation-requests/${id}`)
       .then((res) => setRequest(res.data))
+      .catch(() => toast.error('Failed to load request'))
       .finally(() => setLoading(false));
   }, [id]);
 
   const handleConfirmDonate = async () => {
+    if (user?.status === 'blocked') return toast.error('Your account is blocked. Contact admin.');
     setSubmitting(true);
     try {
-      await axiosSecure.patch(`/donation-requests/${id}/status`, {
-        status: 'inprogress',
-        donorInfo: { name: user.name, email: user.email },
-      });
+      await axiosSecure.patch(`/donation-requests/${id}/status`, { status: 'inprogress' });
       toast.success('Thank you! Your donation has been recorded.');
       setModalOpen(false);
       fetchRequest();
-    } catch {
-      toast.error('Something went wrong, please try again.');
+    } catch (err) {
+      toast.error(err?.response?.data?.message || 'Something went wrong, please try again.');
     } finally {
       setSubmitting(false);
     }
@@ -77,12 +76,16 @@ const DonationRequestDetails = () => {
           )}
 
           {request.donationStatus === 'pending' && (
-            <button
-              onClick={() => setModalOpen(true)}
-              className="mt-8 w-full bg-primary-600 hover:bg-primary-700 text-white py-3 rounded-lg font-medium transition-colors"
-            >
-              Donate Blood
-            </button>
+            user?.status === 'blocked' ? (
+              <p className="mt-8 text-center text-sm text-red-600 bg-red-50 rounded-lg py-3">Your account is blocked — you cannot donate.</p>
+            ) : (
+              <button
+                onClick={() => setModalOpen(true)}
+                className="mt-8 w-full bg-primary-600 hover:bg-primary-700 text-white py-3 rounded-full font-medium transition-colors"
+              >
+                Donate Blood
+              </button>
+            )
           )}
         </div>
       </div>
@@ -110,7 +113,7 @@ const DonationRequestDetails = () => {
             <button
               onClick={handleConfirmDonate}
               disabled={submitting}
-              className="w-full bg-primary-600 hover:bg-primary-700 text-white py-3 rounded-lg font-medium transition-colors disabled:opacity-60"
+              className="w-full bg-primary-600 hover:bg-primary-700 text-white py-3 rounded-full font-medium transition-colors disabled:opacity-60"
             >
               {submitting ? 'Confirming...' : 'Confirm Donation'}
             </button>
